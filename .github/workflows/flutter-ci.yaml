@@ -1,0 +1,67 @@
+# .github/workflows/flutter-ci.yaml
+
+name: Flutter CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      FLUTTER_VERSION: 'stable'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Enable Android emulator
+        run: |
+          flutter config --enable-web
+          flutter config --enable-android
+
+      - name: Cache Pub packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: ${{ runner.os }}-pub-
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Run unit tests
+        run: flutter test --coverage
+
+      - name: Run integration tests
+        run: |
+          # Запускаем эмулятор и проверяем нашим драйвером
+          echo "no" | flutter emulators --create avd --name test
+          flutter emulators --launch test
+          flutter drive --driver=integration_test/driver.dart --target=integration_test/app_test.dart
+        timeout-minutes: 10
+
+      - name: Build debug APK
+        run: flutter build apk --debug
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug.apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+
+      - name: Upload release APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk

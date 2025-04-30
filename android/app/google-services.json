@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "256450955659",
+    "project_id": "family-quiz-61247",
+    "storage_bucket": "family-quiz-61247.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256450955659:android:dbd18e4f72388ceb5b078e",
+        "android_client_info": {
+          "package_name": "com.kirill.familybattle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1oK_Zv1GWmab-NY_hx-cYI_XSb3KX44Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

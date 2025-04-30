@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appTitle": "Family Battle",
+  "login": "Login / Register",
+  "tasks": "Tasks",
+  "profile": "Family Profile",
+  "rating": "Rating",
+  "subscription": "Subscription",
+  "achievements": "Achievements",
+  "settings": "Settings"
+}

@@ -1,0 +1,11 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Семейная Битва",
+  "login": "Вход / Регистрация",
+  "tasks": "Задания",
+  "profile": "Профиль семьи",
+  "rating": "Рейтинг",
+  "subscription": "Подписка",
+  "achievements": "Достижения",
+  "settings": "Настройки"
+}
